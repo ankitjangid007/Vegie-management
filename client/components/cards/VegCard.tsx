@@ -5,7 +5,7 @@ import {
   deleteVegetableById,
   getVegetables,
 } from "@/services/vegetable.service";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { FaEdit, FaTimes } from "react-icons/fa";
 
@@ -35,6 +35,7 @@ const VegetableCard: React.FC<VegetableCardProps> = ({ vegetable }) => {
   } = vegetable;
 
   const path = usePathname();
+  const router = useRouter();
 
   const { socket } = useSocket();
 
@@ -63,7 +64,9 @@ const VegetableCard: React.FC<VegetableCardProps> = ({ vegetable }) => {
           </button>
           <button
             className="absolute bottom-2 right-2 p-2 text-gray-600 hover:text-blue-500"
-            onClick={() => {}}
+            onClick={() => {
+              router.push(`/admin/edit-vegetable?id=${_id}`);
+            }}
           >
             <FaEdit size={20} />
           </button>
